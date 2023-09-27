@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import Product from "./Product";
 
 export default function Products() {
   const [data, setData] = useState([]);
@@ -37,7 +36,7 @@ export default function Products() {
   const ShowProducts = () => {
     return (
       <>
-        <div className="buttons d-flex justify-content-center">
+        <div className="filters-container d-flex justify-content-center">
           <button
             className="btn btn-outline-dark me-2"
             onClick={() => setfilter(data)}
@@ -70,17 +69,16 @@ export default function Products() {
           </button>
         </div>
         {filter.map((product) => {
-          console.log(product);
           return (
             <>
-              <div className="col-md-4 col-lg-3 my-3  p-4 ">
+              <div className="col-md-4 col-lg-3 my-3  p-4 " key={product.id}>
                 <div className="card  text-center h-100 p-2">
                   <img src={product.image} height="250px" alt="" />
                   <div className="card-body">
                     <h5>{product.title.substring(0, 18)}..</h5>
                     <p>${product.price} </p>
                     <NavLink to={`/products/${product.id}`} className="btn btn-primary">
-                      Show item
+                      Details
                     </NavLink>
                   </div>
                 </div>
@@ -101,7 +99,8 @@ export default function Products() {
           </div>
         </div>
         <div className="row d-flex justify-content-center">
-          {loading ? <Loading /> : <ShowProducts />}
+          {<ShowProducts />}
+          {/* {loading ? <Loading /> : <ShowProducts />} */}
         </div>
       </div>
     </>
